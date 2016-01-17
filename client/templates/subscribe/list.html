@@ -1,0 +1,33 @@
+<template name="Subscribe">
+<div id="header">
+  <h1><a href='/'>Pop News</a></h1>
+</div>
+<div id="news-list">
+  <div class="filters">
+    <a class="selected">所有</a>
+    <a>科技</a>
+    <a>电影</a>
+    <a>经济</a>
+  </div>
+  <div class="list-hd fn-clear">
+    消息源订阅
+    <a href="/subscribe/add" class="fn-right add-news-source">+ 提交源</a>
+  </div>
+  <ul class="list-group">
+    <dl class="list-group-item fn-clear title">
+      <dt>小道消息</dt>
+      <dd>文笔毒辣，互联网自媒体的一面旗帜 <em>Popea</em></dd>
+      <div class="fn-right">
+        <span class="switch"></span>
+      </div>
+    </dl>
+    <dl class="list-group-item fn-clear title">
+      <dt>36氪快讯</dt>
+      <dd>科技信息一天看这个就够了 <em>Yison</em></dd>
+      <div class="fn-right">
+        <span class="switch on"></span>
+      </div>
+    </dl>
+  </ul>
+</div>
+</template>

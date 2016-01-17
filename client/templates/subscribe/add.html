@@ -1,0 +1,49 @@
+<template name="AddSubscribe">
+<div id="header">
+  <h1><a href='/'>Pop News</a></h1>
+</div>
+<div id="news-list">
+  <div class="filters">
+    消息源订阅
+  </div>
+  <ul class="list-group no-hover">
+    <li><i>名称：</i><input type="text" placeholder="最多6个汉字或12个英文" /></li>
+    <li><i>URL：</i><input type="text" placeholder="通常是消息列表网页链接" /></li>
+    <li><i>标签：</i>
+      <input type="checkbox" /> 科技
+      <input type="checkbox" /> 电影
+      <input type="checkbox" /> 经济
+      <input type="checkbox" /> 其他
+    </li>
+    <li><i>频率：</i>
+      <input type="radio" name="frequency" /> 10分钟
+      <input type="radio" name="frequency" /> 30分钟
+      <input type="radio" name="frequency" checked="checked" /> 1小时
+      <input type="radio" name="frequency" /> 3小时
+      <input type="radio" name="frequency" /> 6小时
+      <input type="radio" name="frequency" /> 12小时
+      <input type="radio" name="frequency" /> 1天
+    </li>
+    <li>选择抓取模式 <a>自定义</a></li>
+    <div class="mode-select">
+      <li>
+        <select name="">
+          <option>公众号</option>
+        </select>
+      </li>
+    </div>
+    <div class="custom hidden">
+      <li><i>新闻：</i><input type="text" placeholder="如：.item" /></li>
+      <li><i>标题：</i><input type="text" placeholder="如：.title" /></li>
+      <li><i>链接：</i><input type="text" placeholder="如：.link（选填）" /></li>
+      <li><i>描述：</i><input type="text" placeholder="如：.digest（选填）" /></li>
+    </div>
+  </ul>
+  <div class="action">
+    <a>测试</a>
+  </div>
+  <div class="action">
+    <a>保存</a>
+  </div>
+</div>
+</template>

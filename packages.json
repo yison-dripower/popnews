@@ -1,0 +1,10 @@
+{
+  "phantomjs": "1.9.19",
+  "phantom": "0.8.4",
+  "mysql": "2.10.2",
+  "node-mysql-wrapper": "2.8.9",
+  "node-schedule":  "0.6.0",
+  "dateformat": "1.0.12",
+  "underscore": "1.8.3",
+  "sleep": "3.0.0"
+}
