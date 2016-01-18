@@ -25,15 +25,13 @@ db.ready(function(){
 
 var start = 0;
 var scheduleBehav = function(sources, rules) {
-  var sc = sources[start];
-  var rule = getRuleById(sc['rule'], rules);
-  schedule.scheduleJob('*/' + sc.frequency + ' * * * *', function(){
-    doPhantom(rule, sc);
-    start = start + 1;
-    if(start < sources.length) {
-      scheduleBehav(sources, rules, start);
-    }
-  });
+  for(var i=0; i < sources.length; i++) {
+    sc = sources[i];
+    var rule = getRuleById(sc.rule, rules);
+    schedule.scheduleJob('*/' + sc.frequency + ' * * * *', function(params){
+      doPhantom(params.rule, params.source);
+    }.bind(null, {rule:rule, source:sc}));
+  }
 }
 
 var getRuleById = function(id, rules) {
@@ -65,6 +63,9 @@ var doPhantom = function(rule, source) {
         page.evaluate(function (rule) {
           var newsList = document.querySelectorAll(rule.news);
           var list = [];
+          if(newsList.length < 1) {
+            return false;
+          }
           for(i=0; i < newsList.length; i++) {
             var item = newsList[i];
             if(typeof item == 'object') {
@@ -73,7 +74,11 @@ var doPhantom = function(rule, source) {
               var link = item.querySelector(rule.link);
               var news = {};
               if(title != undefined && title != null) {
-                news['title'] = title.innerText ;
+                if(rule.id == 7) {
+                  news['title'] = title.title;
+                } else {
+                  news['title'] = title.innerText ;
+                }
               }
               if(digest != undefined && digest != null) {
                 news['digest'] = digest.innerText ;
@@ -86,7 +91,11 @@ var doPhantom = function(rule, source) {
           }
           return list ;
         }, function (result) {
-          afterPhantom(result, source);
+          if(result === false) {
+            console.log('fetch data error ::: ' + source.name);
+          } else {
+            afterPhantom(result, source);
+          }
           ph.exit();
         }, rule);
       });
@@ -135,8 +144,8 @@ var afterPhantom = function(res, source) {
             item.digest = rs.digest;
           }
           var now = new Date();
-          item.gmt_create = dateFormat(now, "isoDateTime");
-          item.gmt_modified = dateFormat(now, "isoDateTime");
+          item.gmt_create = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
+          item.gmt_modified = dateFormat(now, "yyyy-mm-dd HH:MM:ss");
           try {
             News.save(item).then(function(result){
               console.log('new News :::: ' + result.title);

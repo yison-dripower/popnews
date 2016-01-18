@@ -7,10 +7,17 @@ Router.route('/', function(){
     dependency.changed();
   });
   $(document).on('click', '#news-list li', function(){
-    $('#news-list li').removeClass('focus');
-    if($(this).find('.digest').length > 0) {
-      $(this).addClass('focus');
+    if($(this).hasClass('focus')) {
+      $(this).removeClass('focus');
+    } else {
+      $('#news-list li').removeClass('focus');
+      if($(this).find('.digest').length > 0) {
+        $(this).addClass('focus');
+      }
     }
+  });
+  $(document).on('click', '#news-list li a', function(event){
+    event.stopPropagation();
   });
   setInterval(function(){
     window.location.reload();
